@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -15,35 +14,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- USE VIEWMODEL CALL HERE THAT PULLS FROM REPOSITORY -->
+        <!-- Add Asteroid codename field to android:text here -->
         <TextView
-            android:textColor="@color/colorAccent"
             android:id="@+id/asteroid_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="465633 (2009 JR5)" />
 
 
-        <!-- USE VIEWMODEL CALL HERE THAT PULLS FROM REPOSITORY -->
+        <!-- Add Asteroid closeApproachDate field to android:text here -->
         <TextView
-            android:textColor="@color/colorAccent"
             android:id="@+id/asteroid_close_approach_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="2015-09-08"
+            android:textColor="@color/colorAccent"
             app:layout_constraintLeft_toLeftOf="@id/asteroid_name"
-            app:layout_constraintTop_toBottomOf="@id/asteroid_name" />
+            app:layout_constraintTop_toBottomOf="@id/asteroid_name"
+            tools:text="2015-09-08" />
 
         <ImageView
             android:id="@+id/asteroid_is_potentially_hazardous_image"
-            app:statusIcon="@{asteroid.potentiallyHazardous}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:statusIcon="@{asteroid.potentiallyHazardous}"
             tools:src="@drawable/ic_status_potentially_hazardous" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
