@@ -4,7 +4,7 @@ Asteroid Radar
 
 ## Getting Started
 
-This is a project for the Udacity.com Nanodegree "Developing Android Apps with Kotlin." The initial commit consists of simple starter code cloned from a Udacity GitHub repository. The final project submission, which is all my own work derived from the starter code, will be noted as such in the commit message. Below are the original instructions included with the starter code.
+**This is a project for the Udacity.com Nanodegree "Developing Android Apps with Kotlin." The initial commit consists of simple starter code cloned from a Udacity GitHub repository. The final project submission, which is all my own work derived from the starter code, will be noted as such in the commit message. Below are the original instructions included with the starter code.**
 
 ----------------------------------
 
