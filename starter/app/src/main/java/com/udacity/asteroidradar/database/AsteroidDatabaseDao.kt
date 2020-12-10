@@ -12,5 +12,5 @@ interface AsteroidDatabaseDao {
     fun getAsteroids(): LiveData<List<DatabaseAsteroid>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg videos: DatabaseAsteroid)
+    fun insertAll(vararg asteroid: DatabaseAsteroid)
 }

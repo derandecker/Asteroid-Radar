@@ -11,8 +11,8 @@ data class NetworkAsteroidContainer(val asteroids: List<NetworkAsteroid>)
 @JsonClass(generateAdapter = true)
 data class NetworkAsteroid(
     val id: Long, val codename: String, val closeApproachDate: String,
-    val absoluteMagnitude: Double = 0.0, val estimatedDiameter: Double = 0.0,
-    val relativeVelocity: Double = 0.0, val distanceFromEarth: Double = 0.0,
+    val absoluteMagnitude: Double, val estimatedDiameter: Double,
+    val relativeVelocity: Double, val distanceFromEarth: Double,
     val isPotentiallyHazardous: Boolean)
 
 fun NetworkAsteroidContainer.asDomainModel(): List<Asteroid> {

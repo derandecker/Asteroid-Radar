@@ -6,10 +6,16 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface NetworkAsteroidService {
-    @GET("CHANGE THIS")
-    fun getAsteroidList(): Deferred<NetworkAsteroidContainer>
+    @GET("neo/rest/v1/feed")
+    fun getAsteroidList(
+        @Query("start_date") startDate : String = "2020-12-09",
+        @Query("end_date") endDate: String = "2020-12-16",
+        @Query("api_key") apiKey: String = "z0mgCtuw7Ea23gTFFiels9UdLeOCSjLY0YHd5dq9"
+    ): Deferred<String>
 }
 
 object Network {
