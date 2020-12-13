@@ -1,11 +1,8 @@
 package com.udacity.asteroidradar.api
 
-import android.provider.ContactsContract
-import androidx.room.Database
-import com.udacity.asteroidradar.Asteroid
+import android.util.Log
 import com.udacity.asteroidradar.Constants
 import com.udacity.asteroidradar.database.DatabaseAsteroid
-import com.udacity.asteroidradar.network.NetworkAsteroid
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -39,9 +36,12 @@ fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<DatabaseAsteroid
 
             val asteroid = DatabaseAsteroid(id, codename, formattedDate, absoluteMagnitude,
                 estimatedDiameter, relativeVelocity, distanceFromEarth, isPotentiallyHazardous)
+            Log.i("addAsteroid", asteroid.codename)
             asteroidList.add(asteroid)
         }
     }
+
+    Log.i("RETURN", "")
 
     return asteroidList
 }

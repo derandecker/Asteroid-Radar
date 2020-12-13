@@ -1,5 +1,6 @@
 package com.udacity.asteroidradar.main
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,7 @@ class AsteroidAdapter() : RecyclerView.Adapter<AsteroidViewHolder>() {
             parent,
             false
         )
+        Log.i("ONCREATEVIEWHOLDER", "")
         return AsteroidViewHolder(withDataBinding)
     }
 
@@ -36,6 +38,7 @@ class AsteroidAdapter() : RecyclerView.Adapter<AsteroidViewHolder>() {
     override fun onBindViewHolder(holder: AsteroidViewHolder, position: Int) {
         holder.binding.also{
         it.asteroid = asteroids[position]
+            Log.i("ONBINDVIEWHOLDER", asteroids[position].codename)
         }
     }
     }

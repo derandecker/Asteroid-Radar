@@ -1,7 +1,9 @@
 package com.udacity.asteroidradar.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,18 +26,13 @@ class MainFragment : Fragment() {
 
     private var viewModelAdapter: AsteroidAdapter? = null
 
-    /**
-     * Called immediately after onCreateView() has returned, and fragment's
-     * view hierarchy has been created.  It can be used to do final
-     * initialization once these pieces are in place, such as retrieving
-     * views or restoring state.
-     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.asteroidsList.observe(viewLifecycleOwner, Observer<List<Asteroid>> { asteroids ->
+        viewModel.asteroids.observe(viewLifecycleOwner, Observer<List<Asteroid>> { asteroids ->
             asteroids?.apply {
                 viewModelAdapter?.asteroids = asteroids
             }
+            Log.i("livedata change", asteroids[0].codename)
         })
     }
 
@@ -43,18 +40,20 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentMainBinding.inflate(inflater)
+        val binding: FragmentMainBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewModel = viewModel
 
-        val manager = LinearLayoutManager(activity)
+        val manager = LinearLayoutManager(context)
         binding.asteroidRecycler.layoutManager = manager
+
+        viewModelAdapter = AsteroidAdapter()
 
         //add AsteroidAdapter ListAdapter class in main package and update code here with
         //onclick listener
-        val adapter = AsteroidAdapter()
-        binding.asteroidRecycler.adapter = adapter
+        binding.asteroidRecycler.adapter = viewModelAdapter
 
         setHasOptionsMenu(true)
 
