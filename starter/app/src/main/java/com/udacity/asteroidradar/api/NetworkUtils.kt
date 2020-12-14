@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
+private val simpleDate = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT)
+
 fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<DatabaseAsteroid> {
     val nearEarthObjectsJson = jsonResult.getJSONObject("near_earth_objects")
 
@@ -58,4 +60,15 @@ private fun getNextSevenDaysFormattedDates(): ArrayList<String> {
     }
 
     return formattedDateList
+}
+
+fun getTodaysDate(): String {
+    return simpleDate.format(Date())
+}
+
+fun getEndDate(): String {
+    val calendar = Calendar.getInstance()
+    calendar.add(Calendar.DAY_OF_YEAR, Constants.DEFAULT_END_DATE_DAYS)
+
+    return simpleDate.format(calendar.time)
 }
