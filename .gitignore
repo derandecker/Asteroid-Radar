@@ -6,6 +6,11 @@
 /.idea/modules.xml
 /.idea/workspace.xml
 .idea
+/starter/.idea/caches/build_file_checksum.ser
+/starter/.idea/libraries
+/starter/.idea/modules.xml
+/starter/.idea/workspace.xml
+/starter/.idea
 /starter/.DS_Store
 /starter/build
 /starter/captures
