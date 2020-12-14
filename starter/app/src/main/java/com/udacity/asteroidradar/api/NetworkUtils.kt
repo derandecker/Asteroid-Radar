@@ -38,12 +38,9 @@ fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<DatabaseAsteroid
 
             val asteroid = DatabaseAsteroid(id, codename, formattedDate, absoluteMagnitude,
                 estimatedDiameter, relativeVelocity, distanceFromEarth, isPotentiallyHazardous)
-            Log.i("addAsteroid", asteroid.codename)
             asteroidList.add(asteroid)
         }
     }
-
-    Log.i("RETURN", "")
 
     return asteroidList
 }

@@ -19,29 +19,28 @@ class MainFragment : Fragment() {
         val activity = requireNotNull(this.activity) {}
 
         ViewModelProvider(
-            this,
-            MainViewModelFactory(activity.application)
+                this,
+                MainViewModelFactory(activity.application)
         ).get(MainViewModel::class.java)
     }
 
-    private var viewModelAdapter: AsteroidAdapter? = null
+    private lateinit var viewModelAdapter: AsteroidAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.asteroids.observe(viewLifecycleOwner, Observer<List<Asteroid>> { asteroids ->
             asteroids?.apply {
-                viewModelAdapter?.asteroids = asteroids
+                viewModelAdapter.submitList(asteroids)
             }
-            Log.i("livedata change", asteroids[0].codename)
         })
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val binding: FragmentMainBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+                DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewModel = viewModel
