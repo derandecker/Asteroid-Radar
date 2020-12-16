@@ -1,7 +1,6 @@
 package com.udacity.asteroidradar.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -16,11 +15,9 @@ class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by lazy {
 
-        val activity = requireNotNull(this.activity) {}
-
         ViewModelProvider(
-                this,
-                MainViewModelFactory(activity.application)
+            this,
+            MainViewModelFactory(requireActivity().application)
         ).get(MainViewModel::class.java)
     }
 
@@ -36,11 +33,11 @@ class MainFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val binding: FragmentMainBinding =
-                DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewModel = viewModel
