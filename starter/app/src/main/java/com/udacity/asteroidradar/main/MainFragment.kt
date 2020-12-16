@@ -51,18 +51,21 @@ class MainFragment : Fragment() {
         //onclick listener
         binding.asteroidRecycler.adapter = viewModelAdapter
 
-        setHasOptionsMenu(true)
+//    Not required in project rubric -- left for posterity or future implementation:
+//        setHasOptionsMenu(true)
 
         return binding.root
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_overflow_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+//    Not required in project rubric -- left for posterity or future implementation:
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.main_overflow_menu, menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return true
+//    }
 }
