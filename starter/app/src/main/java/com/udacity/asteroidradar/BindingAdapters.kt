@@ -49,7 +49,7 @@ fun bindImageOfTheDay(imageView: ImageView, pictureOfDay: PictureOfDay?) {
         if (pictureOfDay?.mediaType == "image") {
             imageView.contentDescription = pictureOfDay.title
             Picasso.get()
-                .load(pictureOfDay?.url?.toUri())
+                .load(pictureOfDay.url.toUri())
                 .into(imageView)
         } else {
             imageView.setImageResource(R.drawable.placeholder_picture_of_day)
