@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.withContext
 
 @BindingAdapter("statusIcon")
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
@@ -46,12 +47,12 @@ fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
 @BindingAdapter("imageOfTheDay")
 fun bindImageOfTheDay(imageView: ImageView, pictureOfDay: PictureOfDay?) {
         if (pictureOfDay?.mediaType == "image") {
+            imageView.contentDescription = pictureOfDay.title
             Picasso.get()
                 .load(pictureOfDay?.url?.toUri())
                 .into(imageView)
         } else {
             imageView.setImageResource(R.drawable.placeholder_picture_of_day)
+            imageView.contentDescription = imageView.context.getString(R.string.no_image)
         }
-    Log.d("BINDINGADAPTER", pictureOfDay?.url.toString())
-
 }
