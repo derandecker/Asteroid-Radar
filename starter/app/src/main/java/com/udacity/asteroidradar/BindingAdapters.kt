@@ -45,7 +45,7 @@ fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
 
 @BindingAdapter("imageOfTheDay")
 fun bindImageOfTheDay(imageView: ImageView, pictureOfDay: PictureOfDay?) {
-        if (pictureOfDay?.mediaType == "photo") {
+        if (pictureOfDay?.mediaType == "image") {
             Picasso.get()
                 .load(pictureOfDay?.url?.toUri())
                 .into(imageView)
