@@ -12,8 +12,10 @@ import kotlinx.coroutines.withContext
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
     if (isHazardous) {
         imageView.setImageResource(R.drawable.ic_status_potentially_hazardous)
+        imageView.contentDescription = imageView.context.getString(R.string.no_image)
     } else {
         imageView.setImageResource(R.drawable.ic_status_normal)
+        imageView.contentDescription = imageView.context.getString(R.string.no_image)
     }
 }
 
@@ -46,13 +48,13 @@ fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
 
 @BindingAdapter("imageOfTheDay")
 fun bindImageOfTheDay(imageView: ImageView, pictureOfDay: PictureOfDay?) {
-        if (pictureOfDay?.mediaType == "image") {
-            imageView.contentDescription = pictureOfDay.title
-            Picasso.get()
-                .load(pictureOfDay.url.toUri())
-                .into(imageView)
-        } else {
-            imageView.setImageResource(R.drawable.placeholder_picture_of_day)
-            imageView.contentDescription = imageView.context.getString(R.string.no_image)
-        }
+    if (pictureOfDay?.mediaType == "image") {
+        imageView.contentDescription = pictureOfDay.title
+        Picasso.get()
+            .load(pictureOfDay.url)
+            .into(imageView)
+    } else {
+        imageView.contentDescription = imageView.context.getString(R.string.no_image)
+        imageView.setImageResource(R.drawable.placeholder_picture_of_day)
+    }
 }
