@@ -1,6 +1,7 @@
 package com.udacity.asteroidradar.main
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -18,7 +19,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     //getTodaysDate() and getEndDate() from NetworkUtils.kt in api package -- see imports
     init {
         viewModelScope.launch {
-            asteroidsRepository.refreshAsteroids(getTodaysDate(), getEndDate())
+            try {
+                asteroidsRepository.refreshAsteroids(getTodaysDate(), getEndDate())
+            } catch (e: Exception) {
+                Log.e("VIEWMODELSCOPE", "Error refreshing asteroids")
+            }
         }
     }
 
