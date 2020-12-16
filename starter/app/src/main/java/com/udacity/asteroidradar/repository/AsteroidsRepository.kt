@@ -20,18 +20,18 @@ import java.util.*
 class AsteroidsRepository(private val database: AsteroidDatabase) {
 
     val asteroids: LiveData<List<Asteroid>> =
-            Transformations.map(database.asteroidDao.getAsteroids()) {
-                it.asDomainModel()
-            }
+        Transformations.map(database.asteroidDao.getAsteroids()) {
+            it.asDomainModel()
+        }
 
     suspend fun refreshAsteroids(
-            startDate: String,
-            endDate: String,
-            apiKey: String = BuildConfig.NASA_API_KEY
+        startDate: String,
+        endDate: String,
+        apiKey: String = BuildConfig.NASA_API_KEY   // insert your API KEY here
     ) {
         withContext(Dispatchers.IO) {
             val asteroidsString =
-                    Network.asteroids.getAsteroidList(startDate, endDate, apiKey).await()
+                Network.asteroids.getAsteroidList(startDate, endDate, apiKey).await()
             val asteroidsJson = JSONObject(asteroidsString)
             val asteroidList = parseAsteroidsJsonResult(asteroidsJson)
             database.asteroidDao.insertAll(*asteroidList.toTypedArray())

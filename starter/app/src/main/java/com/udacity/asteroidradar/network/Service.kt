@@ -22,7 +22,7 @@ interface NetworkAsteroidService {
 object Network {
 
     //added OkHttpClient and set timeout to 1 minute to prevent network timeout error
-    //that was occurring
+    //that was occurring from Retrofit
 
     private val client = OkHttpClient.Builder()
         .connectTimeout(1, TimeUnit.MINUTES)
