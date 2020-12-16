@@ -1,11 +1,11 @@
 package com.udacity.asteroidradar.repository
 
-import android.os.Build
-import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.BuildConfig
+import com.udacity.asteroidradar.PictureOfDay
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
 import com.udacity.asteroidradar.database.AsteroidDatabase
 import com.udacity.asteroidradar.database.asDomainModel
@@ -13,8 +13,6 @@ import com.udacity.asteroidradar.network.Network
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class AsteroidsRepository(private val database: AsteroidDatabase) {
@@ -23,6 +21,10 @@ class AsteroidsRepository(private val database: AsteroidDatabase) {
         Transformations.map(database.asteroidDao.getAsteroids()) {
             it.asDomainModel()
         }
+
+    private var _picOfTheDay = MutableLiveData<PictureOfDay>()
+    val picOfTheDay: LiveData<PictureOfDay>
+        get() = _picOfTheDay
 
     suspend fun refreshAsteroids(
         startDate: String,
@@ -37,6 +39,14 @@ class AsteroidsRepository(private val database: AsteroidDatabase) {
             database.asteroidDao.insertAll(*asteroidList.toTypedArray())
         }
 
+    }
+
+    suspend fun refreshImageOfTheDay() {
+        withContext(Dispatchers.Main) {
+            _picOfTheDay.value =
+                Network.imageOfTheDay.getImageOfTheDay(BuildConfig.NASA_API_KEY)
+                    .await()
+        }
     }
 
 

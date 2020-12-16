@@ -1,10 +1,16 @@
 package com.udacity.asteroidradar.network
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.udacity.asteroidradar.Constants
+import com.udacity.asteroidradar.PictureOfDay
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -17,7 +23,16 @@ interface NetworkAsteroidService {
         @Query("end_date") endDate: String,
         @Query("api_key") apiKey: String
     ): Deferred<String>
+
+    @GET("planetary/apod")
+    fun getImageOfTheDay(
+        @Query("api_key") apiKey: String
+    ): Deferred<PictureOfDay>
 }
+
+private val moshi = Moshi.Builder()
+    .add(KotlinJsonAdapterFactory())
+    .build()
 
 object Network {
 
@@ -28,12 +43,21 @@ object Network {
         .connectTimeout(1, TimeUnit.MINUTES)
         .readTimeout(1, TimeUnit.MINUTES)
         .build()
-    private val retrofit = Retrofit.Builder()
+
+    private val retrofitAsteroids = Retrofit.Builder()
         .baseUrl(Constants.BASE_URL)
         .addConverterFactory(ScalarsConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .client(client)
         .build()
 
-    val asteroids = retrofit.create(NetworkAsteroidService::class.java)
+    private val retrofitImageOfTheDay = Retrofit.Builder()
+        .baseUrl(Constants.BASE_URL)
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .client(client)
+        .build()
+
+    val asteroids = retrofitAsteroids.create(NetworkAsteroidService::class.java)
+    val imageOfTheDay = retrofitImageOfTheDay.create(NetworkAsteroidService::class.java)
 }
