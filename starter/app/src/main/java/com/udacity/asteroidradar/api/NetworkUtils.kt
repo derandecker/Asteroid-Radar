@@ -1,6 +1,5 @@
 package com.udacity.asteroidradar.api
 
-import android.util.Log
 import com.udacity.asteroidradar.Constants
 import com.udacity.asteroidradar.database.DatabaseAsteroid
 import org.json.JSONObject
