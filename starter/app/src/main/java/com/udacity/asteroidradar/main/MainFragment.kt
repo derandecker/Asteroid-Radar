@@ -50,8 +50,6 @@ class MainFragment : Fragment() {
             }
         })
 
-        //add AsteroidAdapter ListAdapter class in main package and update code here with
-        //onclick listener
         binding.asteroidRecycler.adapter = viewModelAdapter
 
 //    Not required in project rubric -- left for posterity or future implementation:

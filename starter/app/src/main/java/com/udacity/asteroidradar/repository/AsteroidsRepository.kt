@@ -18,6 +18,9 @@ import org.json.JSONObject
 
 class AsteroidsRepository(private val database: AsteroidDatabase) {
 
+    // Replace "BuildConfig.NASA_API_KEY" below with your own API KEY
+    private val nasaApiKey = BuildConfig.NASA_API_KEY
+
     val asteroids: LiveData<List<Asteroid>> =
         Transformations.map(database.asteroidDao.getAsteroids(getNextSevenDaysFormattedDates())) {
             it.asDomainModel()
@@ -30,7 +33,7 @@ class AsteroidsRepository(private val database: AsteroidDatabase) {
     suspend fun refreshAsteroids(
         startDate: String,
         endDate: String,
-        apiKey: String = BuildConfig.NASA_API_KEY   // insert your API KEY here
+        apiKey: String = nasaApiKey
     ) {
         withContext(Dispatchers.IO) {
             val asteroidsString =
@@ -45,7 +48,7 @@ class AsteroidsRepository(private val database: AsteroidDatabase) {
     suspend fun refreshImageOfTheDay() {
         withContext(Dispatchers.Main) {
             _picOfTheDay.value =
-                Network.imageOfTheDay.getImageOfTheDay(BuildConfig.NASA_API_KEY)
+                Network.imageOfTheDay.getImageOfTheDay(nasaApiKey)
                     .await()
         }
     }
