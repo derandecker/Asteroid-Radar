@@ -1,7 +1,7 @@
 package com.udacity.asteroidradar.network
 //
 //import com.squareup.moshi.JsonClass
-//import com.udacity.asteroidradar.Asteroid
+//import com.udacity.asteroidradar.domain.Asteroid
 //import com.udacity.asteroidradar.database.DatabaseAsteroid
 //
 //

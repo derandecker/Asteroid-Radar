@@ -7,7 +7,7 @@
 
         <variable
             name="asteroid"
-            type="com.udacity.asteroidradar.Asteroid" />
+            type="com.udacity.asteroidradar.domain.Asteroid" />
 
         <variable
             name="clickListener"
@@ -18,9 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/normal_margin"
-        android:orientation="horizontal"
         android:onClick="@{() -> clickListener.onClick(asteroid)}"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/asteroid_name"
@@ -44,6 +43,8 @@
             app:layout_constraintTop_toBottomOf="@id/asteroid_name"
             tools:text="2015-09-08" />
 
+        <!-- for asteroid_is_potentially_hazardous_image
+        contentDescription is set dynamically in BindingAdapter -->
         <ImageView
             android:id="@+id/asteroid_is_potentially_hazardous_image"
             android:layout_width="wrap_content"

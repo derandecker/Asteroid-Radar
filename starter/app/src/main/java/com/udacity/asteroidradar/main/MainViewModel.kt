@@ -5,8 +5,8 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.udacity.asteroidradar.Asteroid
-import com.udacity.asteroidradar.PictureOfDay
+import com.udacity.asteroidradar.domain.Asteroid
+import com.udacity.asteroidradar.domain.PictureOfDay
 import com.udacity.asteroidradar.api.getEndDate
 import com.udacity.asteroidradar.api.getTodaysDate
 import com.udacity.asteroidradar.database.getDatabase
@@ -35,7 +35,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         }
     }
-    
+
     val photoOfTheDay: LiveData<PictureOfDay> = asteroidsRepository.picOfTheDay
 
     val asteroids: LiveData<List<Asteroid>> = asteroidsRepository.asteroids
