@@ -1,14 +1,16 @@
 package com.udacity.asteroidradar.main
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.udacity.asteroidradar.Asteroid
-import com.udacity.asteroidradar.PictureOfDay
 import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
 
@@ -20,18 +22,6 @@ class MainFragment : Fragment() {
             this,
             MainViewModelFactory(requireActivity().application)
         ).get(MainViewModel::class.java)
-    }
-
-    private lateinit var viewModelAdapter: AsteroidAdapter
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewModel.asteroids.observe(viewLifecycleOwner, Observer<List<Asteroid>> { asteroids ->
-            asteroids?.apply {
-                viewModelAdapter.submitList(asteroids)
-            }
-        })
     }
 
     override fun onCreateView(
@@ -47,7 +37,18 @@ class MainFragment : Fragment() {
         val manager = LinearLayoutManager(context)
         binding.asteroidRecycler.layoutManager = manager
 
-        viewModelAdapter = AsteroidAdapter()
+        val viewModelAdapter = AsteroidAdapter(AsteroidListener { asteroid ->
+            this.findNavController().navigate(
+                MainFragmentDirections
+                    .actionShowDetail(asteroid)
+            )
+        })
+
+        viewModel.asteroids.observe(viewLifecycleOwner, Observer<List<Asteroid>> { asteroids ->
+            asteroids?.apply {
+                viewModelAdapter.submitList(asteroids)
+            }
+        })
 
         //add AsteroidAdapter ListAdapter class in main package and update code here with
         //onclick listener

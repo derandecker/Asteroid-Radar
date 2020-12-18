@@ -35,7 +35,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         }
     }
-
+    
     val photoOfTheDay: LiveData<PictureOfDay> = asteroidsRepository.picOfTheDay
 
     val asteroids: LiveData<List<Asteroid>> = asteroidsRepository.asteroids
