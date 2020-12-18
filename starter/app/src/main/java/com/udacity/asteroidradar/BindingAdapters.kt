@@ -51,7 +51,7 @@ fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
 @BindingAdapter("imageOfTheDay")
 fun bindImageOfTheDay(imageView: ImageView, pictureOfDay: PictureOfDay?) {
     if (pictureOfDay?.mediaType == "image") {
-        imageView.contentDescription = pictureOfDay.title
+        imageView.contentDescription = imageView.context.getString(R.string.image_of_the_day) + ": " + pictureOfDay.title
         Picasso.get()
             .load(pictureOfDay.url)
             .into(imageView)

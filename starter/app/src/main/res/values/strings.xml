@@ -23,4 +23,5 @@
     <string name="nasa_picture_of_day_content_description_format">NASA\'s picture of day: %s</string>
     <string name="no_image">No Image</string>
     <string name="help_button_content_description">Help button: What is an a.u. (astronomical unit)?</string>
+    <string name="list_of_asteroids">List of Asteroids</string>
 </resources>
